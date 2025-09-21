@@ -1,0 +1,10 @@
+# .gitignore
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables (private API keys, etc.)
+.env
+
+# Vercel deployment cache and artifacts
+.vercel/

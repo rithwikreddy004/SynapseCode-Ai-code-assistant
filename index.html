@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynapseCode-AI Code Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>History</h3>
+                <button class="new-chat-btn" id="newChatBtn">New Chat +</button>
+            </div>
+            <ul class="history-list" id="historyList">
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1>SynapseCode</h1>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="darkModeToggle">
+                        <input type="checkbox" id="darkModeToggle" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="mode-icon">🌙</span>
+                </div>
+            </header>
+
+            <div class="chat-area" id="chatArea">
+                <div class="message ai-message welcome-message">
+                    <div class="avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Hello! How can I assist you today? Type a prompt below to generate code.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <textarea
+                    id="promptInput"
+                    placeholder="Type your prompt here..."
+                    rows="1"
+                ></textarea>
+                <button id="sendBtn" class="send-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up">
+                        <line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
