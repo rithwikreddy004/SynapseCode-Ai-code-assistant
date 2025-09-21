@@ -208,14 +208,13 @@ body {
     flex-direction: column;
     background-color: var(--bg-color-secondary);
     position: relative;
-    /* NEW: Add transition for background changes on mobile */
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
-/* NEW: Add a subtle overlay when the sidebar is open on mobile */
-.app-container.sidebar-open .main-content {
-  filter: brightness(0.5) blur(2px);
-  pointer-events: none; /* Disables clicks on main content */
+/* NEW: Dim main content when sidebar is open on mobile */
+body.sidebar-open .main-content {
+    filter: brightness(0.5) blur(2px);
+    pointer-events: none; /* Disables clicks on main content */
 }
 
 .main-header {
@@ -252,7 +251,7 @@ body {
     color: var(--text-color);
 }
 
-/* --- NEW: Theme Switch --- */
+/* --- Theme Switch --- */
 .theme-switch-wrapper {
     position: absolute;
     right: 20px;
@@ -508,7 +507,6 @@ textarea:focus {
         transform: translateX(-100%);
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         z-index: 100;
-        /* NEW: Add transition to prevent lag on opening */
         transition: transform 0.3s ease-in-out;
     }
 
@@ -516,7 +514,6 @@ textarea:focus {
         transform: translateX(0);
     }
 
-    /* NEW: Show hamburger button only on mobile */
     .hamburger-btn {
         display: block;
         position: absolute;
@@ -525,7 +522,6 @@ textarea:focus {
         transform: translateY(-50%);
     }
 
-    /* NEW: Adjust header content to make space for the button */
     .main-header {
         justify-content: flex-end;
         padding-right: 50px;
