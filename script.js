@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newChatBtn = document.getElementById("newChatBtn");
   const sidebar = document.getElementById("sidebar");
   const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mainContent = document.getElementById("mainContent"); // NEW: Get main content area
 
   // --- State ---
   let currentChat = [];
@@ -173,7 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       li.appendChild(del);
       li.addEventListener("click", (e) => {
-        if (!e.target.closest(".delete-btn")) loadChat(chat);
+        if (!e.target.closest(".delete-btn")) {
+          loadChat(chat);
+          closeSidebar(); // NEW: Close sidebar on mobile after loading chat
+        }
       });
       historyList.appendChild(li);
     });
@@ -187,11 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
       currentChat = [];
       currentChatId = null;
       chatArea.innerHTML = `<div class="message ai-message welcome-message">
-          <div class="avatar">🤖</div>
-          <div class="message-content">
-            <p>Hello! How can I assist you today? Type a prompt below to generate code.</p>
-          </div>
-        </div>`;
+            <div class="avatar">🤖</div>
+            <div class="message-content">
+              <p>Hello! How can I assist you today? Type a prompt below to generate code.</p>
+            </div>
+          </div>`;
     }
   }
 
@@ -221,15 +225,46 @@ document.addEventListener("DOMContentLoaded", () => {
     currentChat = [];
     currentChatId = null;
     chatArea.innerHTML = `<div class="message ai-message welcome-message">
-        <div class="avatar">🤖</div>
-        <div class="message-content">
-          <p>Hello! How can I assist you today? Type a prompt below to generate code.</p>
-        </div>
-      </div>`;
+          <div class="avatar">🤖</div>
+          <div class="message-content">
+            <p>Hello! How can I assist you today? Type a prompt below to generate code.</p>
+          </div>
+        </div>`;
     document.querySelectorAll(".history-item").forEach((el) => el.classList.remove("active"));
     promptInput.focus();
+    closeSidebar(); // NEW: Close sidebar on mobile after starting a new chat
   });
-  hamburgerBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
+
+  // NEW: Sidebar toggle functionality
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+  }
+
+  function toggleSidebar() {
+    sidebar.classList.toggle('open');
+  }
+
+  hamburgerBtn.addEventListener("click", toggleSidebar);
+
+  // NEW: Close sidebar when main content is clicked on mobile
+  mainContent.addEventListener("click", (e) => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile && sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  // NEW: Add event listener to detect when a user clicks the sidebar itself, stopping propagation of the close event
+  sidebar.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // NEW: Adjust sidebar behavior on window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      sidebar.classList.remove('open');
+    }
+  });
 
   renderHistory();
 });

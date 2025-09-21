@@ -208,6 +208,14 @@ body {
     flex-direction: column;
     background-color: var(--bg-color-secondary);
     position: relative;
+    /* NEW: Add transition for background changes on mobile */
+    transition: background-color 0.3s ease;
+}
+
+/* NEW: Add a subtle overlay when the sidebar is open on mobile */
+.app-container.sidebar-open .main-content {
+  filter: brightness(0.5) blur(2px);
+  pointer-events: none; /* Disables clicks on main content */
 }
 
 .main-header {
@@ -237,6 +245,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 10;
 }
 
 .hamburger-btn svg {
@@ -499,24 +508,31 @@ textarea:focus {
         transform: translateX(-100%);
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         z-index: 100;
+        /* NEW: Add transition to prevent lag on opening */
+        transition: transform 0.3s ease-in-out;
     }
 
     .sidebar.open {
         transform: translateX(0);
     }
 
+    /* NEW: Show hamburger button only on mobile */
     .hamburger-btn {
         display: block;
         position: absolute;
         left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
+    /* NEW: Adjust header content to make space for the button */
     .main-header {
         justify-content: flex-end;
+        padding-right: 50px;
     }
 
     .main-header h1 {
-        padding-right: 40px; /* Space for the hamburger button */
+        padding-right: 0;
     }
 
     .theme-switch-wrapper {
